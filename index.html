@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Link to the new font -->
 </head>
 <body>
+    <div id="scoreboard">
+        <p>Score: <span id="score">0</span></p>
+        <p>Level: <span id="level">1</span></p>
+        <p>High Score: <span id="highScore">0</span></p>
+    </div>
     <div id="gameArea">
         <canvas id="snakeGame" width="400" height="400"></canvas>
-        <div id="scoreboard">
-            <p>Score: <span id="score">0</span></p>
-            <p>Level: <span id="level">1</span></p>
-            <p>High Score: <span id="highScore">0</span></p>
-        </div>
-        <p id="gameOverMessage" style="display: none;">Game Over! <button onclick="restartGame()">Restart</button></p>
     </div>
+    <p id="gameOverMessage" style="display: none;">Game Over!</p>
+    <button onclick="restartGame()">Restart</button>
     <script src="script.js"></script>
 </body>
 </html>

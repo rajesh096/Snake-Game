@@ -1,7 +1,7 @@
 const canvas = document.getElementById("snakeGame");
 const ctx = canvas.getContext("2d");
 
-const scale = 20;
+const scale = 25; // Increased scale for larger grid pixels
 const rows = canvas.height / scale;
 const columns = canvas.width / scale;
 
@@ -14,6 +14,12 @@ let gameInterval;
 let highScore = localStorage.getItem("highScore") || 0;
 
 document.getElementById("highScore").innerText = highScore;
+
+const snakeHeadImage = new Image();
+snakeHeadImage.src = 'Snake.jpg'; // Path to the snake head image
+
+const appleImage = new Image();
+appleImage.src = 'Apple.png'; // Path to the apple image
 
 (function setup() {
     snake = new Snake();
@@ -49,7 +55,9 @@ function gameLoop() {
 }
 
 function drawBackground() {
-    // Draw grid background
+    // Improved grid background
+    ctx.fillStyle = "#1a1a1a";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.strokeStyle = "#2e2e2e";
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
@@ -64,9 +72,17 @@ function Snake() {
     this.nextDirection = this.direction;
 
     this.draw = function () {
-        ctx.fillStyle = "green";
-        this.body.forEach(function (part) {
-            ctx.fillRect(part.x * scale, part.y * scale, scale, scale);
+        this.body.forEach(function (part, index) {
+            if (index === 0) {
+                ctx.drawImage(snakeHeadImage, part.x * scale, part.y * scale, scale, scale);
+            } else {
+                ctx.fillStyle = "green";
+                ctx.beginPath();
+                ctx.arc(part.x * scale + scale / 2, part.y * scale + scale / 2, scale / 2, 0, 2 * Math.PI);
+                ctx.fill();
+                ctx.strokeStyle = "darkgreen";
+                ctx.stroke();
+            }
         });
     };
 
@@ -132,8 +148,7 @@ function Apple() {
     };
 
     this.draw = function () {
-        ctx.fillStyle = "red";
-        ctx.fillRect(this.x * scale, this.y * scale, scale, scale);
+        ctx.drawImage(appleImage, this.x * scale, this.y * scale, scale, scale);
     };
 
     this.randomize();
@@ -153,7 +168,7 @@ function gameOver() {
 function restartGame() {
     score = 0;
     level = 1;
-    gameSpeed = 100;
+    gameSpeed = 200;
     document.getElementById("score").innerText = score;
     document.getElementById("level").innerText = level;
     document.getElementById("gameOverMessage").style.display = "none";

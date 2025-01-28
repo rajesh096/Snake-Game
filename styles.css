@@ -15,6 +15,7 @@ body {
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* Add some space for the scoreboard */
 }
 
 canvas {
@@ -26,10 +27,23 @@ canvas {
 #scoreboard {
     position: absolute;
     top: 10px;
-    left: 10px;
-    color: white;
-    font-size: 18px;
-    font-family: 'Courier New', Courier, monospace;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #333;
+    font-size: 20px;
+    font-family: 'Pacifico', cursive; /* Changed to a more stylish font */
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+#scoreboard p {
+    margin: 0;
+    padding: 0 10px;
 }
 
 button {
@@ -39,6 +53,10 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 button:hover {
@@ -50,4 +68,24 @@ button:hover {
     color: white;
     font-size: 24px;
     font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.snake-part {
+    animation: snakeMove 0.2s linear;
+}
+
+@keyframes snakeMove {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
 }
